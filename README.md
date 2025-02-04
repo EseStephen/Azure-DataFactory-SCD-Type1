@@ -11,25 +11,26 @@ Overwrites the salary of employees with updated salaries.<br>
 Inserts new employees into the table.
 
 
-📌 1. Setting Up Azure Resources
-1️⃣ Creating Azure Blob Storage
-Created a Storage Account in Azure.
-Created a Blob Container named employee-data.
-Uploaded the following files:
-Employees_Initial.csv (Initial employee data)
+📌 1. Setting Up Azure Resources<br>
+1️⃣ Creating Azure Blob Storage<br>
+Created a Storage Account in Azure.<br>
+Created a Blob Container named employee-data.<br>
+Uploaded the following files:<br>
+Employees_Initial.csv (Initial employee data)<br>
 Employees_Updated.csv (Updated employee data)
-2️⃣ Creating Azure SQL Database
-Created an Azure SQL Database named EmployeeDB.
-Created a table to store employee records using the following query:
-sql
-Copy
-Edit
-CREATE TABLE Employees (
-    EmployeeID INT PRIMARY KEY,
-    Name VARCHAR(100),
-    Salary DECIMAL(10,2),
-    Location VARCHAR(100)
+
+
+2️⃣ Creating Azure SQL Database<br>
+Created an Azure SQL Database named EmployeeDB.<br>
+Created a table to store employee records using the following query:<br>
+CREATE TABLE Employees (<br>
+    EmployeeID INT PRIMARY KEY,<br>
+    Name VARCHAR(100),<br>
+    Salary DECIMAL(10,2),<br>
+    Location VARCHAR(100)<br>
 );
+
+
 📌 2. Setting Up Azure Data Factory (ADF)
 1️⃣ Creating Linked Services
 In Azure Data Factory, I created two linked services:
