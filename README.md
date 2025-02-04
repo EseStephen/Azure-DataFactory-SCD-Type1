@@ -49,41 +49,44 @@ Employees_SQL_DS → Points to the Employees table in SQL Database.
 
 
 📌 3. Loading Initial Employee Data into SQL<br>
-Pipeline: LoadInitialEmployees
-Source → Employees_Initial_DS (from Blob Storage).
-Sink → Employees_SQL_DS (to SQL Database).
-Mapping → Mapped columns:
-EmployeeID → EmployeeID
-Name → Name
-Salary → Salary
-Location → Location
+Pipeline: LoadInitialEmployees<br>
+Source → Employees_Initial_DS (from Blob Storage).<br>
+Sink → Employees_SQL_DS (to SQL Database).<br>
+Mapping → Mapped columns:<br>
+EmployeeID → EmployeeID<br>
+Name → Name<br>
+Salary → Salary<br>
+Location → Location<br>
 Executed Pipeline → Successfully inserted records into the SQL database.
-📌 4. Implementing SCD Type 1 using ADF Data Flow
-🔹 Step-by-Step Breakdown of the Data Flow
-I created a Data Flow named SCDType1DataFlow and added the following transformations:
 
-1️⃣ Source: Employees_Updated
-Reads the updated employee dataset (Employees_Updated.csv) from Blob Storage.
-2️⃣ Source: Employees_DB
-Reads the existing employee records from the SQL Database.
-3️⃣ Join Transformation (Left Outer Join)
-Primary Stream: Employees_Updated (Latest data).
-Lookup Stream: Employees_DB (Existing data).
-Join Condition: Employees_Updated.EmployeeID == Employees_DB.EmployeeID.
-This allows us to compare new data with existing records.
-4️⃣ Derived Column Transformation
-Created two new columns:
-IsUpdated → if(Employees_DB.Salary != Employees_Updated.Salary, 1, 0) (Checks if salary has changed).
-IsNew → if(isNull(Employees_DB.EmployeeID), 1, 0) (Checks if the employee is new).
-5️⃣ Filter Transformation
-Filter 1 (Updated Employees) → IsUpdated == 1 (Extracts employees with salary updates).
-Filter 2 (New Employees) → IsNew == 1 (Extracts new employees).
-6️⃣ Alter Row Transformation
-Condition: Update if IsUpdated == 1.
-Condition: Insert if IsNew == 1.
-7️⃣ Sink Transformation
-Sink 1 → Updates employees in SQL Database.
+
+📌 4. Implementing SCD Type 1 using ADF Data Flow<br>
+🔹 Step-by-Step Breakdown of the Data Flow<br>
+I created a Data Flow named SCDType1DataFlow and added the following transformations:<br>
+1️⃣ Source: Employees_Updated<br>
+Reads the updated employee dataset (Employees_Updated.csv) from Blob Storage.<br>
+2️⃣ Source: Employees_DB<br>
+Reads the existing employee records from the SQL Database.<br>
+3️⃣ Join Transformation (Left Outer Join)<br>
+Primary Stream: Employees_Updated (Latest data).<br>
+Lookup Stream: Employees_DB (Existing data).<br>
+Join Condition: Employees_Updated.EmployeeID == Employees_DB.EmployeeID.<br>
+This allows us to compare new data with existing records.<br>
+4️⃣ Derived Column Transformation<br>
+Created two new columns:<br>
+IsUpdated → if(Employees_DB.Salary != Employees_Updated.Salary, 1, 0) (Checks if salary has changed).<br>
+IsNew → if(isNull(Employees_DB.EmployeeID), 1, 0) (Checks if the employee is new).<br>
+5️⃣ Filter Transformation<br>
+Filter 1 (Updated Employees) → IsUpdated == 1 (Extracts employees with salary updates).<br>
+Filter 2 (New Employees) → IsNew == 1 (Extracts new employees).<br>
+6️⃣ Alter Row Transformation<br>
+Condition: Update if IsUpdated == 1.<br>
+Condition: Insert if IsNew == 1.<br>
+7️⃣ Sink Transformation<br>
+Sink 1 → Updates employees in SQL Database.<br>
 Sink 2 → Inserts new employees into SQL Database.
-📌 5. Running & Validating the Pipeline
-Ran the Pipeline → Successfully processed the updated employee data.
+
+
+📌 5. Running & Validating the Pipeline<br>
+Ran the Pipeline → Successfully processed the updated employee data.<br>
 
