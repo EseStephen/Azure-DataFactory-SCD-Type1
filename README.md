@@ -3,7 +3,7 @@ This project demonstrates how to implement Slowly Changing Dimension (SCD) Type 
 
 🚀 Project Overview
 This project demonstrates how to implement Slowly Changing Dimension (SCD) Type 1 using Azure Data Factory (ADF) Data Flows. The project involves:
-##Setting up an Azure Blob Storage container to store employee datasets in CSV format.
+# Setting up an Azure Blob Storage container to store employee datasets in CSV format.
 ##Creating an Azure SQL Database to store employee records.
 ##Building an ADF pipeline to initially load employee data into SQL.
 
