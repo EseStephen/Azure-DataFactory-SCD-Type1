@@ -42,40 +42,40 @@ Azure SQL Database Linked Service – Connects to my SQL database.
 Datasets help ADF read/write data from different sources. I created:<br>
 
 🔹 Datasets for Azure Blob Storage<br>
-Employees_Initial_DS → Points to Employees_Initial.csv in Blob Storage.<br>
-Employees_Updated_DS → Points to Employees_Updated.csv in Blob Storage.<br>
+employeesource → Points to Employees_Initial.csv in Blob Storage.<br>
+employee2source → Points to Employees_Updated.csv in Blob Storage.<br>
 🔹 Dataset for Azure SQL Database<br>
-Employees_SQL_DS → Points to the Employees table in SQL Database.
+AzureSqlTableEmployee → Points to the Employees table in SQL Database.
 
 
 📌 3. Loading Initial Employee Data into SQL<br>
 Pipeline: LoadInitialEmployees<br>
-Source → Employees_Initial_DS (from Blob Storage).<br>
-Sink → Employees_SQL_DS (to SQL Database).<br>
+Source → employeesource (from Blob Storage).<br>
+Sink → AzureSqlTableEmployee (to SQL Database).<br>
 Mapping → Mapped columns:<br>
 EmployeeID → EmployeeID<br>
 Name → Name<br>
 Salary → Salary<br>
 Location → Location<br>
-Executed Pipeline → Successfully inserted records into the SQL database.
+Executed Pipeline → Successfully inserted records into the SQL database with copy data activity.
 
 
 📌 4. Implementing SCD Type 1 using ADF Data Flow<br>
 🔹 Step-by-Step Breakdown of the Data Flow<br>
 I created a Data Flow named SCDType1DataFlow and added the following transformations:<br>
-1️⃣ Source: Employees_Updated<br>
+1️⃣ Source: employee2source<br>
 Reads the updated employee dataset (Employees_Updated.csv) from Blob Storage.<br>
-2️⃣ Source: Employees_DB<br>
+2️⃣ Source: AzureSqlTableEmployee<br>
 Reads the existing employee records from the SQL Database.<br>
 3️⃣ Join Transformation (Left Outer Join)<br>
 Primary Stream: Employees_Updated (Latest data).<br>
-Lookup Stream: Employees_DB (Existing data).<br>
-Join Condition: Employees_Updated.EmployeeID == Employees_DB.EmployeeID.<br>
+Lookup Stream: ExistingEmployees (Existing data).<br>
+Join Condition: Employees_Updated.EmployeeID == ExistingEmployees.EmployeeID.<br>
 This allows us to compare new data with existing records.<br>
 4️⃣ Derived Column Transformation<br>
 Created two new columns:<br>
-IsUpdated → if(Employees_DB.Salary != Employees_Updated.Salary, 1, 0) (Checks if salary has changed).<br>
-IsNew → if(isNull(Employees_DB.EmployeeID), 1, 0) (Checks if the employee is new).<br>
+IsUpdated → if(ExistingEmployees.Salary != Employees_Updated.Salary, 1, 0) (Checks if salary has changed).<br>
+IsNew → if(isNull(ExistingEmployees.EmployeeID), 1, 0) (Checks if the employee is new).<br>
 5️⃣ Filter Transformation<br>
 Filter 1 (Updated Employees) → IsUpdated == 1 (Extracts employees with salary updates).<br>
 Filter 2 (New Employees) → IsNew == 1 (Extracts new employees).<br>
