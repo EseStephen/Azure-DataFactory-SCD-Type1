@@ -31,21 +31,24 @@ CREATE TABLE Employees (<br>
 );
 
 
-📌 2. Setting Up Azure Data Factory (ADF)
-1️⃣ Creating Linked Services
-In Azure Data Factory, I created two linked services:
-
-Azure Blob Storage Linked Service – Connects to my storage account.
+📌 2. Setting Up Azure Data Factory (ADF)<br>
+1️⃣ Creating Linked Services<br>
+In Azure Data Factory, I created two linked services:<br>
+Azure Blob Storage Linked Service – Connects to my storage account.<br>
 Azure SQL Database Linked Service – Connects to my SQL database.
-2️⃣ Creating Datasets
-Datasets help ADF read/write data from different sources. I created:
 
-🔹 Datasets for Azure Blob Storage
-Employees_Initial_DS → Points to Employees_Initial.csv in Blob Storage.
-Employees_Updated_DS → Points to Employees_Updated.csv in Blob Storage.
-🔹 Dataset for Azure SQL Database
+
+2️⃣ Creating Datasets<br>
+Datasets help ADF read/write data from different sources. I created:<br>
+
+🔹 Datasets for Azure Blob Storage<br>
+Employees_Initial_DS → Points to Employees_Initial.csv in Blob Storage.<br>
+Employees_Updated_DS → Points to Employees_Updated.csv in Blob Storage.<br>
+🔹 Dataset for Azure SQL Database<br>
 Employees_SQL_DS → Points to the Employees table in SQL Database.
-📌 3. Loading Initial Employee Data into SQL
+
+
+📌 3. Loading Initial Employee Data into SQL<br>
 Pipeline: LoadInitialEmployees
 Source → Employees_Initial_DS (from Blob Storage).
 Sink → Employees_SQL_DS (to SQL Database).
