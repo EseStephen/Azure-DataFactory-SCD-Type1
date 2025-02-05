@@ -10,6 +10,7 @@ Implementing SCD Type 1 using ADF Data Flows, which:<br>
 Overwrites the salary of employees with updated salaries.<br>
 Inserts new employees into the table.
 
+![Screenshot 2025-02-05 185630](https://github.com/user-attachments/assets/f01a3d64-4d58-4d9e-8311-06910dace894)
 
 📌 1. Setting Up Azure Resources<br>
 1️⃣ Creating Azure Blob Storage<br>
@@ -18,10 +19,6 @@ Created a Blob Container named employee-data.<br>
 Uploaded the following files:<br>
 Employees_Initial.csv (Initial employee data)<br>
 Employees_Updated.csv (Updated employee data)
-
-![Screenshot 2025-02-05 185630](https://github.com/user-attachments/assets/f01a3d64-4d58-4d9e-8311-06910dace894)
-
-
 
 2️⃣ Creating Azure SQL Database<br>
 Created an Azure SQL Database named EmployeeDB.<br>
