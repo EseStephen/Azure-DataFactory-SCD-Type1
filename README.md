@@ -37,6 +37,9 @@ In Azure Data Factory, I created two linked services:<br>
 Azure Blob Storage Linked Service – Connects to my storage account.<br>
 Azure SQL Database Linked Service – Connects to my SQL database.
 
+![Screenshot 2025-02-05 190038](https://github.com/user-attachments/assets/5d8559af-cfa6-4e25-a918-31726b021d1b)
+
+
 
 2️⃣ Creating Datasets<br>
 Datasets help ADF read/write data from different sources. I created:<br>
@@ -58,6 +61,9 @@ Name → Name<br>
 Salary → Salary<br>
 Location → Location<br>
 Executed Pipeline → Successfully inserted records into the SQL database with copy data activity.
+
+![Screenshot 2025-02-04 160243](https://github.com/user-attachments/assets/c97a9fae-27e6-4904-995f-f598644deb77)
+
 
 
 📌 4. Implementing SCD Type 1 using ADF Data Flow<br>
@@ -85,6 +91,9 @@ Condition: Insert if IsNew == 1.<br>
 7️⃣ Sink Transformation<br>
 Sink 1 → Updates employees in SQL Database.<br>
 Sink 2 → Inserts new employees into SQL Database.
+
+![Screenshot 2025-02-04 160409](https://github.com/user-attachments/assets/7ec4cc0d-3eaa-45bb-94f1-19155054089a)
+
 
 
 📌 5. Running & Validating the Pipeline<br>
