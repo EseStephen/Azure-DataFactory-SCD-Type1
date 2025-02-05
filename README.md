@@ -20,6 +20,9 @@ Uploaded the following files:<br>
 Employees_Initial.csv (Initial employee data)<br>
 Employees_Updated.csv (Updated employee data)
 
+![Screenshot 2025-02-05 190548](https://github.com/user-attachments/assets/1ccbbb6a-af1d-43b6-9289-9a7d6b9e10c7)
+
+
 2️⃣ Creating Azure SQL Database<br>
 Created an Azure SQL Database named EmployeeDB.<br>
 Created a table to store employee records using the following query:<br>
